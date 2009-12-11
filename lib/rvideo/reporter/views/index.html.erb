@@ -1,0 +1,27 @@
+ <html>
+    <head>
+      <title>RVideo Reports Index</title>
+      <link rel="stylesheet" href="report.css" type="text/css" media="screen" />
+      <script type="text/javascript" src="report.js"></script>
+    </head>
+    <body>
+      <% @results.each do |input_file, recipes| %>
+        <h1>
+          <a href="<%= input_file %>"><%= File.basename(input_file) %> (launch file)</a>
+        </h1>
+        <ol>
+        <% recipes.each do |recipe_name, result| %>
+        <li>
+          <% css_class = 'warning' unless result['transcoder'].errors.empty? %>
+          <% css_class = 'critical' if result['errors']  %>
+          <% css_class = 'passed' if css_class.nil? %>
+          <div class="<%= css_class %>">
+          <% individual_report_url = "individual_reports/" + underscoreize_file_basename(input_file) + "_" + recipe_name + ".html"  %>
+            <h2><a href="<%= result['output_file'] %>">Launch <%= recipe_name %></a> <a class="view-report" href="<%= individual_report_url %>" >view full report</a></h2>
+          </div>
+        </li>
+        <% end %>
+        </ol>
+      <% end %>
+    </body>
+  </html>

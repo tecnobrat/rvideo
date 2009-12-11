@@ -1,0 +1,81 @@
+  <html>
+    <head>
+      <title>RVideo Reports</title>
+      <link rel="stylesheet" href="<%= report.css %>" type="text/css" media="screen" />
+      <script type="text/javascript" src="<%= report.js %>"></script>
+    </head>
+    <body>
+      <div>
+        <h2><a href="<%= @result['output_file'] %>">Launch output file</a></h2>
+        <ul>
+          <li>
+            <div>
+              <h2>Recipe: <%= @recipe_name %></h2>
+              <p>
+              <% @result['recipe'].each do |key, value|%>
+                <%= key %>: <%= value %><br />
+              <% end %>
+              </p>
+            </div>
+          </li>
+          <% unless @result['errors'].nil? %>
+          <li>
+            <span onclick="toggle('rescued-errors');">Hide/Show Rescued Errors</span>
+            <div id='rescued-errors' style="display: none;">
+            <h2>Rescued Error Backtrace</h2>
+             <h4><%= h(@result['errors'].class.name) %></h4>
+             <p><%= h(@result['errors'].message)%>
+             <p><%= h(@result['errors'].backtrace) %></p>
+            </div>
+          </li>
+          <% end %>
+          <li>
+          <span onclick="toggle('transcoder');">Hide/Show Transcoder</span>
+          <div id='transcoder' style="display: none;">
+              <h2>Transcoder</h2>
+              <% unless @result['transcoder'].errors.empty? %>
+              <h3>Transcoder Errors</h3>
+              <p><%= h(@result['transcoder'].errors.inspect) %></p>
+              <% end %>
+              <h3>Executed Commands</h3>
+              <p><%= h(@result['transcoder'].executed_commands.map(&:command)) %></p>
+              <h3>Raw Meta</h3>
+              <p><%= h(@result['transcoder'].metadata) %></p>
+            </div>
+          <li> 
+            <span onclick="toggle('input-file');">Hide/Show Input File</span>
+            <div id='input-file' style="display: none;">
+              <h2>Original Input File</h2>
+              <h3>Raw Metadata</h3> 
+              <p><%= h(@result['transcoder'].original.raw_metadata) %></p>
+              <h3>Raw Response</h3> 
+              <p><%= h(@result['transcoder'].original.raw_response) %></p>
+            </div>
+          </li>
+          <% if @result['transcoder'].processed %>
+          <li>
+            <span onclick="toggle('output-file');">Hide/Show Output File</span>
+            <div id='output-file' style="display: none;">
+              <h2>Processed Output File</h2>
+              <h3>Raw Metadata</h3>
+              <p><%= h(@result['transcoder'].processed.raw_metadata) %></p>
+              <h3>Raw Response</h3>
+              <p><%= h(@result['transcoder'].processed.raw_response) %></p>
+            </div>          
+          </li>
+          <% end %>
+          <li> 
+            <span onclick="toggle('log');">Hide/Show Log</span>
+            <div id='log' style="display: none;">
+              <h2>Log</h2>
+              <p>
+              <% File.readlines(@result['log']).each do |line| %>
+                <%= line %> <br />
+              <% end %>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </body>
+  </html>
