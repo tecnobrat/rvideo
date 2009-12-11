@@ -22,7 +22,7 @@ require File.join(File.dirname(__FILE__), 'lib', 'rvideo', 'version')
 AUTHOR = ['Jonathan Dahl (Slantwise Design)', 'Brian Stolz']  # can also be an array of Authors
 EMAIL = "brian@tecnobrat.com"
 DESCRIPTION = "Inspect and process video or audio files"
-GEM_NAME = 'rvideo' # what ppl will type to install your gem
+GEM_NAME = 'rvideo-tecnobrat' # what ppl will type to install your gem
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
@@ -42,11 +42,11 @@ Run 'rubyforge setup' to prepare your env for access to Rubyforge
   @rubyforge_username ||= @config["username"]
 end
 
-RUBYFORGE_PROJECT = 'rvideo' # The unix name for your project
+RUBYFORGE_PROJECT = 'rvideo-tecnobrat' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 
-NAME = "rvideo"
+NAME = "rvideo-tecnobrat"
 REV = nil 
 # UNCOMMENT IF REQUIRED: 
 # REV = `svn info`.each {|line| if line =~ /^Revision:/ then k,v = line.split(': '); break v.chomp; else next; end} rescue nil
