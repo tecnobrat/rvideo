@@ -19,8 +19,8 @@ end
 include FileUtils
 require File.join(File.dirname(__FILE__), 'lib', 'rvideo', 'version')
 
-AUTHOR = 'Jonathan Dahl (Slantwise Design)'  # can also be an array of Authors
-EMAIL = "jon@slantwisedesign.com"
+AUTHOR = ['Jonathan Dahl (Slantwise Design)', 'Brian Stolz']  # can also be an array of Authors
+EMAIL = "brian@tecnobrat.com"
 DESCRIPTION = "Inspect and process video or audio files"
 GEM_NAME = 'rvideo' # what ppl will type to install your gem
 
